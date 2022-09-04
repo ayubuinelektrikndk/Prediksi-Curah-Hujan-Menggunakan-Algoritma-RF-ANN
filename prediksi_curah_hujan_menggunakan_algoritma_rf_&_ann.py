@@ -36,13 +36,16 @@ df2 = df[["date","ptemp_c","rh","radiasi_avg"]]
 df2 = df2.groupby("date").mean().reset_index()
 df2
 
+# Menjumlahkan semua data fitur "rain_mm_tot"
 df3 = df[["date","rain_mm_tot"]]
 df3 = df3.groupby("date").sum().reset_index()
 df3
 
+# Menggabungkan data fitur yang sudah di rata-ratakan dan data fitur yang sudah dijumlahkan
 df = pd.merge(df2,df3, on="date")
 df
 
+# Kategori Hujan 
 def generate_label(rain_density):
     if rain_density < 0.5:
         return "Berawan"
